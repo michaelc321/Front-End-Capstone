@@ -6,13 +6,13 @@ export const MainContext = React.createContext()
 export const MainProvider = (props) => {
     const [main, setMain] = useState([])
 
-    const getMain = () => {
+     const getMain = () => {
         return fetch("http://localhost:8088/projects")
             .then(res => res.json())
             .then(setMain)
     }
 
-    const addMain = main => {
+     const addMain = main => {
         return fetch("http://localhost:8088/projects", {
             method: "POST",
             headers: {

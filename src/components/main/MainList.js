@@ -15,13 +15,17 @@ export const MainList = (props) => {
 
     
     return (
-        <div className="main">
-            <button onClick={() => props.history.push("/projects/create")}>
+        <>
+            <div className="mainBtnTop">
+            <button class="mainBtn" onClick={() => props.history.push("/projects/create")}>
                 Add Project
             </button>
+            </div>
+        <div className="main">
             <article className="employeeList">
                 {main.map(main => <Main key={main.id} main={main} />)}
             </article>
         </div>
+        </>
     )
 }
