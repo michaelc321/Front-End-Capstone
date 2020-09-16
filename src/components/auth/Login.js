@@ -22,7 +22,7 @@ export const Login = props => {
             .then(exists => {
                 if (exists && exists.password === password.current.value) {
                     localStorage.setItem("users", exists.id)
-                    props.history.push("/")
+                    props.history.push("/main")
                 } else if (exists && exists.password !== password.current.value) {
                     passwordDialog.current.showModal()
                 } else if (!exists) {
@@ -43,7 +43,7 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Nashville Kennels</h1>
+                    <h1>Let's get you organized!</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
