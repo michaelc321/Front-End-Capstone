@@ -1,58 +1,89 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import {  } from "./PhotoProvider";
 
 
-export const PhotoUpload = (props) => {
-    
- 
+export const PhotoUpload = () => {
+    const [image, setImage] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [photo, setPhoto] = useState([])
 
-        const [fileInputState, setFileInputState] = useState('')
-        const [previewSource, setPreviewSource] = useState('')
-        const [selectedFile, setSelectedFile] = useState('')
-        const handleFileInputChange = (e) => {
-            const file = e.target.files[0]
-            previewFile(file)
-        }
+    const downloadImage = () => {
+        const get = fetch ('https://api.cloudinary.com/v1_1/db1peeart/image/upload')
+        .then (res => res.json())
+        .then (setPhoto)
+        console.log(setPhoto)
+    }
 
-        const previewFile = (file) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file)
-            reader.onloadend = () => {
-                setPreviewSource(reader.result)
+    const uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'Michael')
+        setLoading(true)
+        const res = await fetch(
+            'https://api.cloudinary.com/v1_1/db1peeart/image/upload',
+            {
+                method: 'POST',
+                body: data
             }
-        }
-
-        const handleSubmitFile = (e) => {
-            console.log("submitting")
-            e.preventDefault()
-            if(!previewSource) return;
-            uploadImage(previewSource)
-        }
-
-        const uploadImage = (base64EncodedImage) => {
-            console.log(base64EncodedImage)
-            return fetch('http://localhost:8088/photos', {
-                    method: 'POST',
-                    body: JSON.stringify({data: base64EncodedImage}),
-                    headers: {'Content-type': 'application/json'}
-                })
-            }
+        )
+        const file= await res.json()
+        const url = file.url
+        console.log(data)
+       
         
 
+        setImage(file.secure_url)
+        setLoading(false)
+        
+        const photo = {
+            photo: url
+        }
+        
+        
+        console.log(photo)
+
+        
+        const imageUrl = (photo) => {
+            return fetch("http://localhost:8088/photos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(photo)
+                
+            })
+        }
+        return imageUrl(photo)
+        
+    }
+    
+
+
+    
+
     return (
-        <div className="formUploadDivMain">
-        <form className="formUpload" onSubmit={(handleSubmitFile)}>
-            <input className="form-input" 
-                    type="file" 
-                    name="image" 
-                    onChange={handleFileInputChange} 
-                    value= {fileInputState}  />
-            <input className="formSubmit" type="submit" />
-            <div className="formUploadDiv">
-                   {previewSource && (
-                    <img class="formImage" src={previewSource} alt="chosen" />
-                    )}
-            </div>
-        </form>
-            </div>
+
+        <div className="upload">
+            <h2>Create Project</h2>
+            <small>Display an Image, Name, and add some Details.</small>
+            <input className="buttonStyle"
+                    type="file"
+                    name="file"
+                    id="file"
+                    className="hide"
+                    placeholder="Upload an Image"
+                    onChange={uploadImage} />
+            <label for="file" className="button-style">Add Photo!</label>
+            {loading ? (
+                <h3>Loading...</h3>
+            ): (
+                <img src={image} style={{width: '300px', height: '300px'}} />
+            )
+            }
+            <div onChange={downloadImage}></div>
+        </div>
     )
+ 
+
 }

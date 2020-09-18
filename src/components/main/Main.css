@@ -1,10 +1,8 @@
 .main {
     display: flex;
-    justify-content: center;
-    border: solid 2px black;
-    margin-top: 2rem;
-    width: 60%;
-    margin-left: 20%;
+    flex-direction: column;
+    /* border: solid 2px black; */
+    
 }
 
 .mainBtnTop {
@@ -26,6 +24,10 @@
     border-radius: 2rem;
 }
 
+.mainBtn:hover {
+    color: blue;
+}
+
 /* FORM ------------------------------*/
 .formAll {
     display: flex;
@@ -37,13 +39,14 @@
     margin-left: 36%;
 }
 
-.formUploadDivMain {
+.upload {
 display: flex;
 justify-content: center;
-flex-wrap: wrap;
+flex-direction: column;
+align-items: center;
 margin-left: 15rem;
 margin-right: 15rem;
-margin-top: 5%;
+margin-top: 0.5%;
 }
 
 .formImage {
@@ -51,9 +54,70 @@ margin-top: 5%;
     width:  200px;
     height: 200px;
     object-fit: cover;
-    margin-left: 17%;
     margin-top: 5%;
     
 }
 
+.formText {
+    height: 5rem;
+}
+
+.hide {
+    display: none;
+    width: 5.5rem;
+    margin-right: 50px;
+}
+
+.button-style {
+    display: inline-block;
+        background-color: grey;
+        border-radius: 10px;
+        border: 4px double #cccccc;
+        color: #eeeeee;
+        text-align: center;
+        font-size: 18px;
+        padding: 20px;
+        width: 100px;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+        
+}
+
+  .button-style:hover {
+    background: darkgrey;
+    
+  }
+
+  .textArea {
+      height: 7rem;
+      width: 29.5rem;
+  }
 /* FORM ------------------------------*/
+
+.mainList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.inProgress {
+    margin-bottom: 2px;
+}
+
+.newProjBox {
+    width: 30rem;
+    margin-left: 40rem;
+    margin-top: 1rem;
+}
+
+.field {
+    padding: 5px 0
+}
+
+.details {
+    width: 290px;
+}
