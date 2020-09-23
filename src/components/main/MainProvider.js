@@ -4,7 +4,14 @@ import React, { useState, useEffect } from "react"
 export const MainContext = React.createContext()
 
 export const MainProvider = (props) => {
-    const [main, setMain] = useState([])
+    const [mains, setMain] = useState([])
+   
+
+    useEffect(() => {
+        getMain()
+    }, [])
+
+    
 
      const getMain = () => {
         return fetch("http://localhost:8088/projects")
@@ -23,11 +30,33 @@ export const MainProvider = (props) => {
             .then(getMain)
     }
 
+    const getMainById = (id) => {
+        return fetch(`http://localhost:8088/projects/${id}`)
+    }
+
+    const deleteMain = mainId => {
+        return fetch(`http://localhost:8088/projects/${mainId}`, {
+            method: "DELETE"
+        })
+            .then(getMain)
+    }
+
+    const updateMain = (main) => {
+        return fetch(`http://localhost:8088/projects/${main.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(main)
+        })
+            .then(getMain)
+    }
+
     return (
         <MainContext.Provider value={{
-            main, addMain, getMain
+            mains, addMain, getMain, deleteMain, getMainById, updateMain
         }}>
             {props.children}
         </MainContext.Provider>
-    )
+    ) 
 }

@@ -3,31 +3,48 @@ import { Route } from "react-router-dom"
 import { MainList } from "./main/MainList"
 import { MainProvider } from "./main/MainProvider"
 import { MainForm } from "./main/MainForm";
-import { UserProvider } from "./users/UserProvider";
 import { PhotoList } from "./photos/PhotoList";
 import { PhotoProvider } from "./photos/PhotoProvider";
+import { Main } from "./main/Main";
 
-export const Application = (props) => {
+export const Application = () => {
     return (
         <>
-           <MainProvider>
-               <UserProvider>
-                   <PhotoProvider>
-                <Route exact path="/main" render={
-                    props => <MainList {...props} />
-                } />
 
-                <Route exact path="/photos" render={
-                    props => <PhotoList {...props} />
-                } />
-
-                <Route exact path="/projects/create">
-                    
-                    <MainForm />
-                </Route>
-                 </PhotoProvider>
-                </UserProvider>
+        <MainProvider>
+            <PhotoProvider>
+                 <Route exact path="/main" render={(props) => {
+                    return <MainList history={props.history} />
+                }} />
+                </PhotoProvider>
         </MainProvider>
+
+        <MainProvider>
+            <PhotoProvider>
+                <Route path="/projects/create" render={(props) => {
+                    return <MainForm {...props} />
+                }} />
+                </PhotoProvider>
+        </MainProvider>
+        
+        <MainProvider>
+            <PhotoProvider>
+
+            <Route path="/main/:mainId(\d+)" render={
+                            props => <MainList {...props} />
+                        } />
+
+            <Route path="/main/edit/:mainId(\d+)" render={(props) => {
+                return <MainForm {...props} />
+            }} />
+            </PhotoProvider>
+        </MainProvider>
+
+        <PhotoProvider>
+                 <Route exact path="/photos" render={(props) => {
+                    return <PhotoList history={props.history} />
+                }} />
+        </PhotoProvider>
         </>
     )
 }

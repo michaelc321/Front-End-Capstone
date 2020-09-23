@@ -8,7 +8,7 @@
 .mainBtnTop {
     display: flex;
     justify-content: center;
-    margin-top: 10rem;
+    margin-top: 3rem;
 }
 
 .mainContent {
@@ -120,4 +120,11 @@ margin-top: 0.5%;
 
 .details {
     width: 290px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 7rem;
+
 }

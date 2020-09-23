@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react"
 import { MainContext } from "./MainProvider"
-import { Main } from "./Main"
+import { Main} from "./Main"
 import { PhotoContext } from "../photos/PhotoProvider";
 // import "./Mains.css"
 
 export const MainList = (props) => {
 
-    const { main, getMain } = useContext(MainContext)
+    const { mains, getMain } = useContext(MainContext)
     const { photos, getPhotos } = useContext(PhotoContext)
     
 
@@ -18,6 +18,7 @@ export const MainList = (props) => {
     
     return (
         <>
+                <h1 className="title">Project Name</h1>
             <div className="mainBtnTop">
             <button class="mainBtn" onClick={() => props.history.push("/projects/create")}>
                 Add Project
@@ -26,13 +27,13 @@ export const MainList = (props) => {
         <div className="main">
                 <h2 className="inProgress">In-Progress</h2>
             <article className="mainList">
-    {main.map(main => {
-            const image = photos.find(photos => photos.id === main.photoId) || {}
-    return <Main key={main.id} main={main}  image={image}/>
-        })
+    {mains.map(main => <Main key={main.id} main={main}{...props}/>)
     }
             </article>
         </div>
         </>
     )
 }
+
+
+
