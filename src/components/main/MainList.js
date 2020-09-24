@@ -25,7 +25,7 @@ export const MainList = (props) => {
                 <h1 className="title">VacaPlus<img src={require('../images/picture.png')} style={{width: '62px', height: '62px'}} /></h1>
             <div className="mainBtnTop">
             <button class="mainBtn" onClick={() => props.history.push("/projects/create")}>
-                Add Memory
+                Add Card
             </button>
             </div>
         <div className="main">

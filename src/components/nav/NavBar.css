@@ -2,16 +2,29 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    background-color: aliceblue;
+    background-color: rgba(245, 212, 105, 0.308);
     padding-left:10%;
 }
 
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
+    margin-left: 55rem;
 }
 
 .btn-info {
     height: 40px;
     width: 85px;
+}
+
+.cursive {
+    font-family: 'Lobster', cursive;
+    margin-right: 70%;
+    
+}
+
+
+.logout {
+    margin-right: 16%;
+    margin-top: 3%;
 }

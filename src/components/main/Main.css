@@ -36,7 +36,8 @@
 .mainBtnTop {
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .mainContent {
@@ -49,14 +50,16 @@
 }
 
 .mainBtn {
-    width: 15rem;
+    width: 11rem;
     height: 5rem;
     font-size: 1.5rem;
     border-radius: 2rem;
+    font-family: 'Righteous', cursive;
 }
 
 .mainBtn:hover {
     color: blue;
+    background-color: lightgrey;
 }
 
 /* FORM ------------------------------*/
@@ -148,6 +151,8 @@ margin-top: 0.5%;
 .mainList {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    border-top: 2px dotted black;
 }
 
 .inProgress {
@@ -171,6 +176,6 @@ margin-top: 0.5%;
 .title {
     display: flex;
     justify-content: center;
-    margin-top: 7rem;
+    margin-top: 3rem;
 
 }

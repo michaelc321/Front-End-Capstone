@@ -28,18 +28,16 @@ return(
 
 <Card style={{ width: '18rem' }} className="mainContent" key={props.main.id}>
     <a href={props.main.link}>
-<Card.Img variant="top" className="imgURL" src={props.main.imageURL} />
+<Card.Img variant="top" className="imgURL" alt="Image" title="Click Image for details" src={props.main.imageURL} />
 </a>
 <Card.Body>
-  <Card.Title className="Main__name">{props.main.name}</Card.Title>
+  <Card.Title className="Main__name"><h2>{props.main.name}</h2></Card.Title>
   <Card.Text className="details">
   {props.main.details}
   </Card.Text>
 </Card.Body>
 <ListGroup className="list-group-flush">
   <ListGroupItem className="time">{props.main.date}</ListGroupItem>
-  <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-  <ListGroupItem>Vestibulum at eros</ListGroupItem>
 </ListGroup>
 <Card.Body>
 <button onClick={() => deleteMain(props.main.id)}>Delete</button>
