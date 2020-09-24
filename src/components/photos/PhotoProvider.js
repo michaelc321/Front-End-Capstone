@@ -23,9 +23,21 @@ export const PhotoProvider = (props) => {
             .then(getPhotos)
     }
 
+    const updatePhotos = (photo) => {
+        return fetch(`http://localhost:8088/projects/${photo.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(photo)
+        })
+            .then(getPhotos)
+    }
+
+
     return (
         <PhotoContext.Provider value={{
-            photos, addPhotos, getPhotos
+            photos, addPhotos, getPhotos, updatePhotos
         }}>
             {props.children}
         </PhotoContext.Provider>

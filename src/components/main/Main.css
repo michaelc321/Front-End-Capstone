@@ -1,8 +1,36 @@
 .main {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-image: url(../images/backgroundimage.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+
     /* border: solid 2px black; */
     
+}
+
+.photo-select {
+    border: 1px solid black;
+    width: 95px;
+    padding: .5%;
+    background-color: lightgrey;
+    border-radius: 4%;
+    
+}
+
+.photo-select:hover {
+    color: blue;
+}
+
+.photo-select:active {
+    color: purple;
+}
+
+.title {
+    font-family: 'Lobster', cursive;
 }
 
 .mainBtnTop {
@@ -12,9 +40,12 @@
 }
 
 .mainContent {
-    border: 2px solid grey;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    border: 2px solid gray;
+    margin: 2%;
+   border-radius: 2.5%;
+   background-color: lightgray;
+   font-family: 'Patrick Hand', cursive;
+   padding: 2%;
 }
 
 .mainBtn {
@@ -62,6 +93,22 @@ margin-top: 0.5%;
     height: 5rem;
 }
 
+.form--content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.form-group {
+    width: 300px;
+}
+
+.form--content fieldset {
+    padding: 8px;
+}
+
 .hide {
     display: none;
     width: 5.5rem;
@@ -101,7 +148,6 @@ margin-top: 0.5%;
 .mainList {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
 }
 
 .inProgress {

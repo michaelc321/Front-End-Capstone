@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from "react"
 import { MainContext } from "./MainProvider"
+import { PhotoContext } from "../photos/PhotoProvider";
+import "./Main.css"
 
 
 export const MainForm = (props) => {
     const { addMain, updateMain, getMain, mains } = useContext(MainContext)
+    const { addPhotos, updatePhotos, getPhotos, photos} = useContext(PhotoContext)
 
 
    
@@ -32,6 +35,7 @@ export const MainForm = (props) => {
     
     useEffect(() => {
         getMain()
+        getPhotos()
     }, [])
 
     useEffect(() => {
@@ -41,7 +45,7 @@ export const MainForm = (props) => {
 
     const constructNewMain = () => {
 
-        const userId = parseInt(localStorage.getItem("project"))
+        const userId = parseInt(localStorage.getItem("users"))
 
 
         if (editMode) {
@@ -49,7 +53,10 @@ export const MainForm = (props) => {
                 name: main.title,
                 details: main.medium,
                 imageURL: main.imageURL,
-                id: main.id
+                date: main.time,
+                link: main.link,
+                id: main.id,
+                userId: userId
             })
                 .then(() => props.history.push("/main"))
         } else {
@@ -57,8 +64,11 @@ export const MainForm = (props) => {
                 name: main.title,
                 details: main.medium,
                 imageURL: image,
+                date: main.time,
+                link: main.link,
                 userId: userId
             })
+                .then(saveImage())
                 .then(() => props.history.push("/main"))
         }
     }
@@ -77,52 +87,48 @@ export const MainForm = (props) => {
             }
         )
         const file = await res.json()
-        const url = file.url
+        // const url = file.url
         setImage(file.secure_url)
         setLoading(false)
 
-
-        const photo = {
-            photo: url
-        }
         
-        const imageUrl = (photo) => {
-            return fetch("http://localhost:8088/photos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(photo)
-                
+        
+    }
+    
+    const saveImage = () => {
+        const userId = parseInt(localStorage.getItem("users"))
+
+            addPhotos({
+                photo: image,
+                link: main.link,
+                userId: userId
             })
         }
-        return imageUrl(photo)
         
-    
-    }
 
     return (
         <>
-        <form>
+        <form className="form--content">
             <fieldset>
                 <h2 className="MainForm__title">{editMode ? "Update Main" : "Create Project"}</h2>
                 {editMode 
                 ? (<div className="Main__image">
                     <img src={main.imageURL} alt={main.title} style={{width: '300px', height:'300px'}} />
                 </div>) : (
-                <div className="form-group">
-                    <label htmlFor="MainImage">Image: </label>
+                    <div className="form-group">
+                    <div className="photo-select"><label className="form-group" for="MainImage">Select Photo</label></div>
                     <input type="file" 
                             name="file" 
                             id="MainImage" 
                             required autoFocus 
                             className="form-control" 
                             placeholder="Upload an image"
-                            onChange={uploadImage} />
+                            onChange={uploadImage}
+                            style={{display: 'none'}} />
                             {loading ? (
                                 <h3>Loading...</h3>
                             ) : (
-                                <img src={image} style={{width: '300px'}} alt="" />
+                                <img src={image} style={{width: '300px', height: '300px'}} alt="" />
                             )}
                 </div>
                 )}
@@ -145,15 +151,29 @@ export const MainForm = (props) => {
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
-            <button onClick={() => props.history.push("/main")} className="btn btn-primary ml-3">Cancel</button>
+            <fieldset>
+            <input className="form-group" type="date" id="time" name="time"
+            min="2020-01-01" max="2200-12-31" defaultValue={main.time} onChange={handleControlledInputChange}>     
+            </input>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="MainLink">Website: </label>
+                    <input type="text" name="link" id="MainLink" required autoFocus className="form-control" 
+                    placeholder="Enter URL"
+                    defaultValue={main.link}
+                    onChange={handleControlledInputChange} />
+                </div>
+            </fieldset>
             <button type="submit"
                 onClick={evt => {
                     evt.preventDefault()
                     constructNewMain()
                 }}
-                className="btn btn-primary ml-3">
+                className="form-group btn btn-primary ml-3">
                 {editMode ? "Save Updates" : "Save New Main"}
             </button>
+            <button onClick={() => props.history.push("/main")} className="form-group btn btn-primary ml-3">Cancel</button>
         </form>
         </>
     )

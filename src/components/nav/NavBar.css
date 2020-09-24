@@ -10,3 +10,8 @@
     flex-basis: 20%;
     list-style-type: none;
 }
+
+.btn-info {
+    height: 40px;
+    width: 85px;
+}
