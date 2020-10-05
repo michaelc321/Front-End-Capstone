@@ -5,6 +5,7 @@ export const MainContext = React.createContext()
 
 export const MainProvider = (props) => {
     const [mains, setMain] = useState([])
+    const [searchTerms, setTerms] = useState("")
    
 
     useEffect(() => {
@@ -54,7 +55,7 @@ export const MainProvider = (props) => {
 
     return (
         <MainContext.Provider value={{
-            mains, addMain, getMain, deleteMain, getMainById, updateMain
+            mains, addMain, getMain, deleteMain, getMainById, updateMain, searchTerms, setTerms
         }}>
             {props.children}
         </MainContext.Provider>

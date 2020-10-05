@@ -110,7 +110,7 @@ export const MainForm = (props) => {
         <>
         <form className="form--content">
             <fieldset>
-                <h2 className="MainForm__title">{editMode ? "Update Main" : "Create Project"}</h2>
+                <h2 className="MainForm__title">{editMode ? "Update Main" : "Create Card"}</h2>
                 {editMode 
                 ? (<div className="Main__image">
                     <img src={main.imageURL} alt={main.title} style={{width: '300px', height:'300px'}} />
@@ -135,10 +135,10 @@ export const MainForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="MainTitle">Project Name: </label>
+                    <label htmlFor="MainTitle">Place Visited: </label>
                     <input type="text" name="title" id="MainTitle" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={main.title}
+                    defaultValue={main.name}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
@@ -147,13 +147,13 @@ export const MainForm = (props) => {
                     <label htmlFor="size">Details: </label>
                     <textarea type="text" name="medium" id="medium" required autoFocus className="form-control" 
                     placeholder="Enter Text"
-                    defaultValue={main.medium}
+                    defaultValue={main.details}
                     onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
             <fieldset>
             <input className="form-group" type="date" id="time" name="time"
-            min="2020-01-01" max="2200-12-31" defaultValue={main.time} onChange={handleControlledInputChange}>     
+            min="2020-01-01" max="2200-12-31" defaultValue={main.date} onChange={handleControlledInputChange}>     
             </input>
             </fieldset>
             <fieldset>

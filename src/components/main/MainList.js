@@ -4,19 +4,26 @@ import { Main} from "./Main"
 import { PhotoContext } from "../photos/PhotoProvider";
 import { Button } from 'react-bootstrap';
 import { Link } from "react-router-dom"
+import { MainSearch } from "./MainSearch";
 
 // import "./Mains.css"
 
 export const MainList = (props) => {
 
-    const { mains, getMain } = useContext(MainContext)
+    const { mains, getMain, searchTerms } = useContext(MainContext)
     const { photos, getPhotos } = useContext(PhotoContext)
     const [ userMains, setUserMains ] = useState([])
+
 
     useEffect(() => {
         getMain()
         getPhotos()
     }, [])
+
+    useEffect(() => {
+        const matchingNames = mains.filter(main => main.name.toLowerCase().includes(searchTerms.toLowerCase()))
+        setUserMains(matchingNames)
+    }, [searchTerms])
 
     useEffect(() => {
         const filter = mains.filter(m => m.userId === parseInt(localStorage.getItem("users")))
@@ -40,6 +47,7 @@ export const MainList = (props) => {
                 Add Card
             </button>
             </div>
+            <MainSearch />
         <div className="main">
             <article className="mainList">
     {userMains.map(main => <Main key={main.id} main={main}{...props}/>)

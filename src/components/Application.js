@@ -5,7 +5,7 @@ import { MainProvider } from "./main/MainProvider"
 import { MainForm } from "./main/MainForm";
 import { PhotoList } from "./photos/PhotoList";
 import { PhotoProvider } from "./photos/PhotoProvider";
-import { Main } from "./main/Main";
+
 
 export const Application = () => {
     return (
@@ -14,7 +14,9 @@ export const Application = () => {
         <MainProvider>
             <PhotoProvider>
                  <Route exact path="/main" render={(props) => {
-                    return <MainList history={props.history} />
+                     return <>
+                        <MainList history={props.history} />
+                        </>
                 }} />
                 </PhotoProvider>
         </MainProvider>
@@ -30,8 +32,8 @@ export const Application = () => {
         <MainProvider>
             <PhotoProvider>
 
-            <Route path="/main/:mainId(\d+)" render={
-                            props => <MainList {...props} />
+            <Route path="/main/:mainId(\d+)" render={ props => 
+                        <MainList {...props} />
                         } />
 
             <Route path="/main/edit/:mainId(\d+)" render={(props) => {
